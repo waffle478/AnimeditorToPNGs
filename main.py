@@ -72,7 +72,8 @@ for frames in rgbList['frames']:
 
     img.putdata(rgbImage)
     rgbImage = list()
-    img.save(fr"images\img{imgCount}.png")
+    imgIndex = imgCount + 1
+    img.save(fr"images\img{imgIndex}.png")
     imgCount += 1
 
 print("Done C:")
