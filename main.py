@@ -7,6 +7,7 @@ Made by: Csabi 2022. 09. 25.
 """
 
 import re
+import os
 from PIL import Image as im
 from tkinter import Tk
 from tkinter.filedialog import askopenfilename
@@ -64,6 +65,15 @@ rgbImage = list()
 
 imgCount = 0
 
+# Check whether the specified path exists or not
+isExist = os.path.exists(path)
+
+if not isExist:
+  
+  # Create a new directory because it does not exist 
+  os.makedirs(path)
+  print("Created images directory")
+
 for frames in rgbList['frames']:
     for rows in frames['rows']:
         for row in rows:
@@ -72,7 +82,8 @@ for frames in rgbList['frames']:
 
     img.putdata(rgbImage)
     rgbImage = list()
-    img.save(fr"images\img{imgCount}.png")
+    imgIndex = imgCount + 1
+    img.save(fr"images\img{imgIndex}.png")
     imgCount += 1
 
 print("Done C:")
