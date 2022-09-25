@@ -16,8 +16,8 @@ def hex_to_rgba(value):
         value = "0xff000000"
     value = value.split('0x')[1]
 
-    if len(value) == 6:
-        value = f"00{value}"
+    while len(value) != 8:
+        value = f"0{value}"
 
     print(f"\t{value}")
     return tuple(int(value[i:i + 2], 16) for i in (2, 4, 6, 0))
