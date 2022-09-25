@@ -19,7 +19,6 @@ def hex_to_rgba(value):
     while len(value) != 8:
         value = f"0{value}"
 
-    print(f"\t{value}")
     return tuple(int(value[i:i + 2], 16) for i in (2, 4, 6, 0))
 
 Tk().withdraw()
@@ -69,8 +68,6 @@ for frames in rgbList['frames']:
     for rows in frames['rows']:
         for row in rows:
             if row:
-                print(row)
-
                 rgbImage.append((hex_to_rgba(row)))
 
     img.putdata(rgbImage)
@@ -78,6 +75,4 @@ for frames in rgbList['frames']:
     img.save(fr"images\img{imgCount}.png")
     imgCount += 1
 
-
-
-print(rgbList)
+print("Done C:")
