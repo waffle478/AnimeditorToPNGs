@@ -1,4 +1,3 @@
-
 """
 This is a converter for Animeditor save files. It pukes out PNG images from the save file so you can use
     any other (just one) program to convert it to a (fuckin') HD video
@@ -12,6 +11,7 @@ from PIL import Image as im
 from tkinter import Tk
 from tkinter.filedialog import askopenfilename
 
+
 def hex_to_rgba(value):
     if value == "0":
         value = "0xff000000"
@@ -21,6 +21,7 @@ def hex_to_rgba(value):
         value = f"0{value}"
 
     return tuple(int(value[i:i + 2], 16) for i in (2, 4, 6, 0))
+
 
 Tk().withdraw()
 file = askopenfilename(filetypes=[("Default Qpa save file", '*.qp4')])
@@ -39,7 +40,7 @@ for lin in lines:
     lin = lin.strip()
     if lin == "frame({":
         frameStart = True
-        tempRows = dict(rows=[]) #{f"{frame}": []}
+        tempRows = dict(rows=[])  # {f"{frame}": []}
 
     end = re.search("},1000\\)", lin)
     if end:
@@ -58,7 +59,6 @@ for lin in lines:
         else:
             tempRows["rows"].append(rowVals)
 
-
 img = im.new("RGBA", (32, 26), (255, 0, 0, 255))
 
 rgbImage = list()
@@ -66,13 +66,13 @@ rgbImage = list()
 imgCount = 1
 
 # Check whether the specified path exists or not
-isExist = os.path.exists(path)
+path = "images"
 
-if not isExist:
-  
-  # Create a new directory because it does not exist 
-  os.makedirs(path)
-  print("Created images directory")
+if not os.path.exists(path):
+    # Create a new directory because it does not exist
+
+    os.makedirs(path)
+    print("Created images directory")
 
 for frames in rgbList['frames']:
     for rows in frames['rows']:
@@ -83,11 +83,10 @@ for frames in rgbList['frames']:
     img.putdata(rgbImage)
     rgbImage = list()
     imgIndex = imgCount + 1
-    img.save(fr"images\img{imgIndex}.png")
+    img.save(fr"{path}\img{imgIndex}.png")
     imgCount += 1
 
 print("Done C:")
-
 
 """Not used currently.. needs to be checked."""
 """for frames in rgbList['frames']:
