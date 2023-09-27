@@ -7,9 +7,8 @@ Made by: Csabi 2022. 09. 25.
 
 import re
 import os
+import argparse
 from PIL import Image as im
-from tkinter import Tk
-from tkinter.filedialog import askopenfilename
 
 
 def hex_to_rgba(value):
@@ -23,11 +22,21 @@ def hex_to_rgba(value):
     return tuple(int(value[i:i + 2], 16) for i in (2, 4, 6, 0))
 
 
-Tk().withdraw()
-file = askopenfilename(filetypes=[("Default Qpa save file", '*.qp4')])
-qpaFile = open(file, 'r')
-lines = qpaFile.readlines()
-qpaFile.close()
+argParser = argparse.ArgumentParser()
+
+argParser.add_argument("-f", "--file", help="Enter a qp4 format file location")
+
+args = argParser.parse_args()
+
+lines = ""
+
+try:
+    qpaFile = open(args.file, 'r')
+    lines = qpaFile.readlines()
+    qpaFile.close()
+except IOError:
+    print("Could not open file")
+    exit(-1)
 
 rgbList = dict(frames=[])
 tempRows = dict(rows=[])
