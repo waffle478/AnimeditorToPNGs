@@ -63,7 +63,7 @@ img = im.new("RGBA", (32, 26), (255, 0, 0, 255))
 
 rgbImage = list()
 
-imgCount = 0
+imgCount = 1
 
 # Check whether the specified path exists or not
 isExist = os.path.exists(path)
@@ -87,3 +87,28 @@ for frames in rgbList['frames']:
     imgCount += 1
 
 print("Done C:")
+
+
+"""Not used currently.. needs to be checked."""
+"""for frames in rgbList['frames']:
+    if len(frames['rows'][1]) == 32:
+        for row in frames['rows']:
+            for rgb in row:
+                if rgb:
+                    rgbImage.append((hex_to_rgba(rgb)))
+        img.putdata(rgbImage)
+        rgbImage = list()
+        img.save(fr"images\img{imgCount}.png")
+        imgCount += 1
+
+    elif len(frames['rows'][1]) > 32:
+        for i in range(0, len(frames['rows'][1]) - 32, 2):
+            for row in frames['rows']:
+                if row:
+                    for x in range(32):
+                        rgbImage.append(hex_to_rgba(row[x + i]))
+            img.putdata(rgbImage)
+            rgbImage = list()
+            img.save(fr"images\img{imgCount}.png")
+            imgCount += 1
+        continue"""
